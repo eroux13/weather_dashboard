@@ -6,6 +6,7 @@ $(document).ready(function () {
     var currentWindSpeed = $(".currentWindSpeed");
     var currentUV = $(".currentUV");
     var currentDate = moment().format("M/D/YYYY");
+    var previousCity = "";
 
     // 5-Day Forecast Variables
     var oneDayDate = $(".oneDayDate");
@@ -40,8 +41,9 @@ $(document).ready(function () {
     var apiKey = "0bb7f8c937e11372ee8f87cdc8461899";
 
     // Currentweather API
-    $("#submitBtn").click(function () {
+    function getWeather(city) {
         // Clear previous search results
+        console.log("hello")
         cityName.html("");
         $(".city").empty();
         currentTemp.html("");
@@ -74,22 +76,17 @@ $(document).ready(function () {
         fiveDayTemp.html("");
         fiveDayHumidity.html("");
 
-        // User input
-        var citySearchValue = $("#citySearch").val();
-
-        // Sotre input in local storage array
-        storedSearch.push(citySearchValue);
-
         // Display History
         var cityHistory = $("#cityHistory");
         var cityHistoryName = $("<li>");
         cityHistoryName.addClass("cityHistoryName");
         cityHistory.prepend(cityHistoryName);
-        cityHistoryName.html(citySearchValue);
+        cityHistoryName.attr("data-city", city);
+        cityHistoryName.html(city);
 
         // Conditional if input is blank
-        if (citySearchValue) {
-            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + citySearchValue + "&appid=" + apiKey + "&units=imperial")
+        if (city) {
+            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial")
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
@@ -120,7 +117,7 @@ $(document).ready(function () {
         else {
             alert("Please enter a city");
         }
-    })
+    }
 
     // One Call API
     function getForecast(lat, lon) {
@@ -130,6 +127,23 @@ $(document).ready(function () {
                 console.log(data);
                 var uvValue = data.current.uvi;
                 currentUV.html(uvValue);
+
+                // UV Index colors based off of researched chart
+                if (uvValue <= 2.5) {
+                    currentUV.addClass("favorable");
+                    currentUV.removeClass("moderate");
+                    currentUV.removeClass("severe");
+                }
+                else if (uvValue > 2.5 && uvValue <= 7.5) {
+                    currentUV.addClass("moderate");
+                    currentUV.removeClass("favorable");
+                    currentUV.removeClass("severe");
+                }
+                else {
+                    currentUV.addClass("severe");
+                    currentUV.removeClass("favorable");
+                    currentUV.removeClass("moderate");
+                }
 
                 var oneDayIconValue = data.daily[0].weather[0].icon;
                 var oneDayTempValue = data.daily[0].temp.day;
@@ -203,4 +217,19 @@ $(document).ready(function () {
             })
             .catch(error => console.log(error))
     }
+
+    // Allow User to click on previous searches
+    $("#cityHistory").click(".cityHistoryName", function (event) {
+        previousCity = $(event.target).text();
+        $("#citySearch").val(previousCity);
+        getWeather(previousCity);
+    })
+
+    $("#submitBtn").click(function () {
+        // User input
+        var citySearchValue = $("#citySearch").val();
+        // Sotre input in local storage array
+        storedSearch.push(citySearchValue);
+        getWeather(citySearchValue);
+    })
 }); 

@@ -38,6 +38,39 @@ $(document).ready(function () {
 
     // Currentweather API
     $("#submitBtn").click(function () {
+        // Clear previous search results
+        cityName.html("");
+        $(".city").empty();
+        currentTemp.html("");
+        currentHumidity.html("");
+        currentWindSpeed.html("");
+        currentUV.html("");
+
+        oneDayDate.html("");
+        oneDayIconDisplay.html("");
+        oneDayTemp.html("");
+        oneDayHumidity.html("");
+
+        twoDayDate.html("");
+        twoDayIconDisplay.html("");
+        twoDayTemp.html("");
+        twoDayHumidity.html("");
+
+        threeDayDate.html("");
+        threeDayIconDisplay.html("");
+        threeDayTemp.html("");
+        threeDayHumidity.html("");
+
+        fourDayDate.html("");
+        fourDayIconDisplay.html("");
+        fourDayTemp.html("");
+        fourDayHumidity.html("");
+
+        fiveDayDate.html("");
+        fiveDayIconDisplay.html("");
+        fiveDayTemp.html("");
+        fiveDayHumidity.html("");
+
         // User input
         var citySearchValue = $("#citySearch").val();
 
@@ -66,9 +99,10 @@ $(document).ready(function () {
                     currentHumidity.html(humidityValue + "%");
                     currentWindSpeed.html(windSpeedValue + " mph");
 
+                    $("#citySearch").val("");
+
                 })
                 .catch(error => console.log(error));
-            // Need to find UV Index
         }
         else {
             alert("Please enter a city");

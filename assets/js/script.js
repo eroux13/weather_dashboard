@@ -33,6 +33,9 @@ $(document).ready(function () {
     var fiveDayTemp = $(".fiveDayTemp");
     var fiveDayHumidity = $(".fiveDayHumidity");
 
+    // Local Storage
+    var storedSearch = JSON.parse(localStorage.getItem("city")) || [];
+
     // API Key
     var apiKey = "0bb7f8c937e11372ee8f87cdc8461899";
 
@@ -74,6 +77,16 @@ $(document).ready(function () {
         // User input
         var citySearchValue = $("#citySearch").val();
 
+        // Sotre input in local storage array
+        storedSearch.push(citySearchValue);
+
+        // Display History
+        var cityHistory = $("#cityHistory");
+        var cityHistoryName = $("<li>");
+        cityHistoryName.addClass("cityHistoryName");
+        cityHistory.prepend(cityHistoryName);
+        cityHistoryName.html(citySearchValue);
+
         // Conditional if input is blank
         if (citySearchValue) {
             fetch("https://api.openweathermap.org/data/2.5/weather?q=" + citySearchValue + "&appid=" + apiKey + "&units=imperial")
@@ -99,8 +112,8 @@ $(document).ready(function () {
                     currentHumidity.html(humidityValue + "%");
                     currentWindSpeed.html(windSpeedValue + " mph");
 
+                    localStorage.setItem("city", JSON.stringify(storedSearch));
                     $("#citySearch").val("");
-
                 })
                 .catch(error => console.log(error));
         }
@@ -190,5 +203,4 @@ $(document).ready(function () {
             })
             .catch(error => console.log(error))
     }
-
 }); 

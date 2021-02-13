@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- Link Fonts Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <!-- Link Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <header class="row">
+        <section class="col header">
+            <h1>Weather Dashboard</h1>
+        </section>
+    </header>
+    <section class="row">
+        <aside class="col-lg-4 bg-light search">
+            <h2>Search for a city:</h2>
+            <input type="text" id="citySearch">
+            <button class="btn btn-primary" id="submitBtn"><i class="fas fa-search-location"></i></button>
+            <ul>
+                <li>City 1</li>
+                <li>City 2</li>
+                <li>City 3</li>
+                <li>City 4</li>
+                <li>City 5</li>
+            </ul>
+        </aside>
+        <article class="col-lg-7">
+            <section class="row currentCity">
+                <section class="row">
+                    <article class="col-lg-3">
+                        <h2 class="cityName">Search City Name</h2>
+                    </article>
+                    <article class="col-lg-2">
+                        <h2 class="currentDate">Date</h2>
+                    </article>
+                </section>
+                <section class="row city">
+                    <!-- Weather Icon Dynamically Appears Here -->
+                </section>
+                <p>Temperature: <span class="currentTemp"></span></p>
+                <p>Humidity: <span class="currentHumidity"></span></p>
+                <p>Wind Speed: <span class="currentWindSpeed"></span></p>
+                <p>UV Index: <span class="currentUV"></span></p>
+            </section>
+            <section class="row forecastRow">
+                <h2>5-day Forecast:</h2>
+                <section class="row">
+                    <article class="col-lg-2 forecastCard">
+                        <h4>Date</h4>
+                        <p>Temp: <span></span></p>
+                        <p>Humidity: <span></span></p>
+                    </article>
+                    <article class="col-lg-2 forecastCard">
+                        <h4>Date</h4>
+                        <p>Temp: <span></span></p>
+                        <p>Humidity: <span></span></p>
+                    </article>
+                    <article class="col-lg-2 forecastCard">
+                        <h4>Date</h4>
+                        <p>Temp: <span></span></p>
+                        <p>Humidity: <span></span></p>
+                    </article>
+                    <article class="col-lg-2 forecastCard">
+                        <h4>Date</h4>
+                        <p>Temp: <span></span></p>
+                        <p>Humidity: <span></span></p>
+                    </article>
+                    <article class="col-lg-2 forecastCard">
+                        <h4>Date</h4>
+                        <p>Temp: <span></span></p>
+                        <p>Humidity: <span></span></p>
+                    </article>
+                </section>
+            </section>
+        </article>
+    </section>
+
+    <!-- Link jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- Link  moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- Link JavaScript -->
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
